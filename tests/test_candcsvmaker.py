@@ -40,8 +40,15 @@ def make_source_file(tmp_path, name="data_test.fil"):
 
 
 PASSING_ROW = dict(
-    snr=10, ssample=100, stime=1.5, width=3, dmidx=5, dm=50,
-    cluster_size=4, startsamp=99, endsamp=101,
+    snr=10,
+    ssample=100,
+    stime=1.5,
+    width=3,
+    dmidx=5,
+    dm=50,
+    cluster_size=4,
+    startsamp=99,
+    endsamp=101,
 )
 
 
@@ -55,9 +62,9 @@ def test_filters_rows_by_snr_dm_and_clustersize(tmp_path, source_file):
         tmp_path / "a.cand",
         [
             PASSING_ROW,
-            dict(PASSING_ROW, snr=3),          # fails snr threshold
-            dict(PASSING_ROW, dm=5),           # fails dm_min
-            dict(PASSING_ROW, dm=6000),        # fails dm_max
+            dict(PASSING_ROW, snr=3),  # fails snr threshold
+            dict(PASSING_ROW, dm=5),  # fails dm_min
+            dict(PASSING_ROW, dm=6000),  # fails dm_max
             dict(PASSING_ROW, cluster_size=1),  # fails clustersize
         ],
     )
@@ -85,8 +92,14 @@ def test_output_columns_and_values(tmp_path, source_file):
 
     df = pd.read_csv(out)
     assert list(df.columns) == [
-        "file", "snr", "stime", "width", "dm", "label",
-        "chan_mask_path", "num_files",
+        "file",
+        "snr",
+        "stime",
+        "width",
+        "dm",
+        "label",
+        "chan_mask_path",
+        "num_files",
     ]
     row = df.iloc[0]
     assert row["file"] == os.path.abspath(str(source_file))
@@ -130,8 +143,14 @@ def test_no_candidates_pass_threshold_writes_header_only(tmp_path, source_file):
     df = pd.read_csv(out)
     assert len(df) == 0
     assert list(df.columns) == [
-        "file", "snr", "stime", "width", "dm", "label",
-        "chan_mask_path", "num_files",
+        "file",
+        "snr",
+        "stime",
+        "width",
+        "dm",
+        "label",
+        "chan_mask_path",
+        "num_files",
     ]
 
 
