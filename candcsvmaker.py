@@ -3,9 +3,16 @@
 import glob
 import pandas as pd
 import os
-import tqdm
 import logging
 import argparse
+
+try:
+    from rich.progress import track
+except ImportError:  # only the progress bar is lost
+
+    def track(sequence, description=""):
+        return sequence
+
 
 logger = logging.getLogger(__name__)
 
@@ -57,7 +64,7 @@ def gencandcsv(
     )
     cands_out.to_csv(outname, mode="w", header=True, index=False)
 
-    for file in tqdm.tqdm(candsfiles, position=0, leave=True):
+    for file in track(candsfiles, description="Reading candidates"):
         cands_out = pd.DataFrame(
             columns=[
                 "file",
@@ -74,7 +81,7 @@ def gencandcsv(
             file,
             header=None,
             comment="#",
-            delim_whitespace=True,
+            sep=r"\s+",
             names=[
                 "snr",
                 "ssample",

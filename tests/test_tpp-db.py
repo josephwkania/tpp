@@ -1,13 +1,19 @@
-import requests
-import yaml
+import pytest
 
 
-#TESTS NEEDED NOT YET WRITTEN:
+# TESTS NEEDED NOT YET WRITTEN:
 
-# Token generation
+
+@pytest.mark.skip(reason="not yet implemented")
 def test_token():
-    
-# Read an entry from tpp-db
+    """Token generation."""
 
-# Write an entry to tpp-db
 
+@pytest.mark.skip(reason="not yet implemented")
+def test_read_entry():
+    """Read an entry from tpp-db."""
+
+
+@pytest.mark.skip(reason="not yet implemented")
+def test_write_entry():
+    """Write an entry to tpp-db."""
